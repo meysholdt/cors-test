@@ -1,0 +1,6 @@
+% curl -X POST \                                                                                      
+  'https://api.catfood.gitpod.cloud/gitpod.v1.OrganizationService/ListOrganizations' \
+  --header 'Authorization: Bearer gitpod_pat_****' \  
+  --header 'content-type: application/json' \  
+  --data-raw '{}'
+{"organizations":[{"id":"8818c76e-9c91-45e9-94fe-2d312cad0f5a","name":"catfood","creationTime":"2024-08-21T14:44:30.718Z","slug":"catfood"}],"pagination":{"total":1}}%    

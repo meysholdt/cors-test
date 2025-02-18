@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 
 export default function Home() {
   const [githubPat, setGithubPat] = useState("");
@@ -8,8 +7,19 @@ export default function Home() {
   const [output, setOutput] = useState("");
 
   const handleCallGitpod = async () => {
-    setOutput("Called Gitpod directly...");
-    // Implementation will go here
+    const response = await fetch(
+      "https://api.catfood.gitpod.cloud/gitpod.v1.OrganizationService/ListOrganizations",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${gitpodPat}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      }
+    );
+    const data = await response.json();
+    setOutput(JSON.stringify(data));
   };
 
   const handleCallGitpodViaLib = async () => {
