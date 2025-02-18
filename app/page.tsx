@@ -23,13 +23,28 @@ export default function Home() {
   };
 
   const handleCallGitpodViaLib = async () => {
-    setOutput("Called Gitpod via library...");
-    // Implementation will go here
+    // const c = new JsonRpcWorkspaceClient();
+    // const organizations = await c.listOrganizations();
+    setOutput("not implemented");
   };
 
   const handleCallGithub = async () => {
-    setOutput("Called GitHub...");
-    // Implementation will go here
+    try {
+      const response = await fetch("https://api.github.com/user/repos", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${githubPat}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+      });
+
+      const data = await response.json();
+      setOutput(JSON.stringify(data, null, 2));
+    } catch (error) {
+      setOutput(
+        `Error: ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
   };
 
   return (
